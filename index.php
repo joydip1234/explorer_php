@@ -5,6 +5,8 @@
  * Date: 3/28/2017
  * Time: 11:03 AM
  */
+ini_set('post_max_size', '250M');
+ini_set('upload_max_filesize', '200M');
 $count = 0;
 //$wr = fopen('files/new.txt', 'w');
 $toshow = true;
@@ -12,23 +14,26 @@ $uploaded = [];
 if(!isset($_COOKIE["len"])){
     setcookie("len",0, time() + (86400 * 30), "/");
 }
-if (!empty($_FILES["file"])) {
+if (!empty($_FILES["file"] )) {
     $uploaded = null;
-    $uploaded = array();
-    foreach ($_FILES["file"]["name"] as $key => $name) {
-        if ($_FILES['file']['error'][$key] == 0 && move_uploaded_file($_FILES['file']['tmp_name'][$key], "files/{$name}")) {
-            if(!in_array($name,$_COOKIE)){
-                $count++;
-                setcookie(crc32($name), $name, time() + (86400 * 30), "/");
-                $uploaded[$key] = $name;
-                //$toWrite = " \r\n[" . $key . "] " . $uploaded[$key] . "      --size " . round($_FILES['file']['size'][$key] / 1024) . "kB \r\n";
-                //fwrite($wr, $toWrite);
-            }else{
-                $uploaded[$key] = "already_here";
-            }
-        }
+    if($_POST['ajax'] ==true){
+	    $uploaded = array();
+	    foreach ($_FILES["file"]["name"] as $key => $name) {
+	        if ($_FILES['file']['error'][$key] == 0 && move_uploaded_file($_FILES['file']['tmp_name'][$key], "files/{$name}")) {
+	            if(!in_array($name,$_COOKIE)){
+	                $count++;
+	                setcookie(crc32($name), $name, time() + (86400 * 30), "/");
+	                $uploaded[$key] = $name;
+	                //$toWrite = " \r\n[" . $key . "] " . $uploaded[$key] . "      --size " . round($_FILES['file']['size'][$key] / 1024) . "kB \r\n";
+	                //fwrite($wr, $toWrite);
+	            }else{
+	                $uploaded[$key] = "already_here";
+	            }
+	        }
 
-        setcookie("len",$count, time() + (86400 * 30), "/");
+	        setcookie("len",$count, time() + (86400 * 30), "/");	
+	    }
+    
     }
     //fclose($wr);
     returnAjax($uploaded);

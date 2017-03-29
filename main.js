@@ -14,7 +14,16 @@ var handler = function (event) {
             data.append('file[]', fileIn.files[i]);
         }
 
-        var req = new XMLHttpRequest();
+        var req = null;
+
+        if (window.XMLHttpRequest)
+        {
+            req = new XMLHttpRequest();
+        }
+        else
+        {
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
         req.upload.addEventListener('progress', function (event) {
             if (event.lengthComputable) {
@@ -30,12 +39,12 @@ var handler = function (event) {
         req.addEventListener('readystatechange', function () {
             if (this.readyState == 4 && this.status == 200) {
                 var resp = eval(this.response);
+                console.log(resp.toString());
                 var x = $('uploaded');
                 var folder = $('folder');
                 //$('log_header').style.display = 'block';
                 for (var i = 0; i < resp.length; i++) {
                     console.log(resp[i]);
-                    $('noFileToast').style.display = "none";
                     if(resp[i]!="already_here"){
                         var y = document.createElement("img");
                         var div = document.createElement('div');
