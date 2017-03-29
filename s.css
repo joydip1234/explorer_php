@@ -1,0 +1,193 @@
+body {
+    border: 0;
+    padding: 0;
+    background-color: #424242;
+    margin: 0;
+    font-family: "Droid Sans", sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+#fu {
+    display: block;
+    padding: 5px;
+    background-color: rgba(55, 55, 55, 0.9);
+    width: 100%;
+    overflow: auto;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    z-index: 200 !important;
+}
+
+form {
+    border: none;
+    padding: 0;
+    clear: none;
+    display: inline-block;
+}
+
+#progress_bar {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: calc(50vw - 100px);
+    transform-origin: 50% 50%;
+    padding: 20px;
+    background-color: #c3a2f9;
+    color: #333;
+    width: 200px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#fileIn {
+    display: inline-block;
+    padding: 5px;
+    float: left;
+    margin-right: 10px;
+    border: none;
+}
+
+#uploaded {
+    background-color: #777;
+    display: block;
+    width: 100%;
+    padding: 5px;
+    overflow-x: auto;
+    box-sizing: border-box;
+
+}
+
+.shownfile {
+    display: inline-block;
+    padding: 10px;
+    max-width: 150px;
+    box-sizing: border-box;
+    float: left;
+    max-height: 150px;
+    overflow: hidden;
+    animation: appear 0.2s ease-in;
+}
+
+#log {
+    position: relative;
+    clear: both;
+    width: 98vw;
+    margin: 1vw auto;
+    min-height: 200px;
+    display: block;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.filename {
+    animation: appear 0.2s ease-in;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    border: none;
+    display: inline-flex ;
+    background-color: #616161 !important;
+    color: #fff;
+    border-radius: 3px;
+    padding: 7px 10px;
+    outline: none;
+    margin: 3px;
+    float: left;
+
+}
+
+input {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    border: none;
+    background-color: #7986cb !important;
+    color: #fff;
+    border-radius: 3px;
+    padding: 7px 10px;
+    outline: none;
+    text-transform: uppercase;
+    float: left;
+    margin: 3px;
+    cursor: pointer;
+}
+
+#folder {
+    width: 100vw;
+    min-height: 30px;
+    background-color: #616161;
+    color: #d9a3a3;
+    overflow-x: hidden;
+    box-sizing: border-box !important;
+    position: relative;
+    padding-bottom: 100px;
+}
+
+.file_cont{
+    animation: appear 0.1s ease-in;
+    display: inline-block;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    background-color: #615F85 !important;
+    color: #fff;
+    width: 170px;
+    padding:1px;
+    outline: none;
+    border-radius: 2px;
+    margin: 7px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+    overflow: hidden;
+    height: 2em;
+}
+
+.file_ls {
+    display: inline-block;
+    color: #fff;
+    width: 150px;
+    text-overflow: ellipsis;
+    padding: 7px 10px;
+    text-decoration: none;
+    transition: 0.2s;
+    overflow: hidden;
+    float: left;
+    height: 2em;
+}
+
+.rm{
+
+    display:inline-block;
+    overflow: hidden;
+    background-color: #eeeeee;
+    color:#222;
+    width: 2em;
+    height: 2em;
+    transition: 0.2s;
+    float: left;
+    margin-right: -3em;
+    border-radius: 1em;
+    padding: 4px;
+    opacity: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+.file_cont:hover .rm{
+    opacity:1;
+    margin-right: 0 !important;
+}
+.file_cont:hover .file_ls{
+    width: calc(150px - 2em) !important;
+}
