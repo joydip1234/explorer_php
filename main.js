@@ -1,4 +1,4 @@
-function $(e) {
+function getElem(e) {
     return document.getElementById(e);
 }
 
@@ -40,9 +40,9 @@ var handler = function (event) {
             if (this.readyState == 4 && this.status == 200) {
                 var resp = eval(this.response);
                 console.log(resp.toString());
-                var x = $('uploaded');
-                var folder = $('folder');
-                //$('log_header').style.display = 'block';
+                var x = getElem('uploaded');
+                var folder = getElem('folder');
+                getElem('log_header').style.display = 'block';
                 for (var i = 0; i < resp.length; i++) {
                     console.log(resp[i]);
                     if(resp[i]!="already_here"){
@@ -62,13 +62,13 @@ var handler = function (event) {
                         y.setAttribute('src', './files/' + resp[i].toString());
                         y.classList.add('shownfile');
                         x.appendChild(y);
-                        //$("log").innerHTML += "<div class='filename'>" + resp[i] + "</div>";
-                        $('count_holder').innerHTML = parseInt($('count_holder').innerHTML) + 1;
+                        getElem("log").innerHTML += "<div class='filename'>" + resp[i] + "</div>";
+                        getElem('count_holder').innerHTML = parseInt(getElem('count_holder').innerHTML) + 1;
                     }else{
-                        $('progress_bar').innerHTML="same file can't be uploaded twice";
-                        $('progress_bar').style.opacity = "1"
+                        getElem('progress_bar').innerHTML="same file can't be uploaded twice";
+                        getElem('progress_bar').style.opacity = "1"
                         setTimeout(function () {
-                            $("progress_bar").style.opacity = '0';
+                            getElem("progress_bar").style.opacity = '0';
                         },1000);
                     }
 
@@ -79,14 +79,14 @@ var handler = function (event) {
         });
 
         req.upload.addEventListener('load', function (e) {
-            $('progress_bar').style.opacity = '0';
+            getElem('progress_bar').style.opacity = '0';
         });
 
         req.upload.addEventListener('error', function () {
             alert("error uploading file");
         });
 
-        req.open('POST', 'index.php', true);
+        req.open('POST', 'index.php');
         //req.setRequestHeader("Cache-Control", "no-cache");
         req.send(data);
     } catch (e) {
@@ -104,7 +104,7 @@ function clearDir() {
     var dlt = new XMLHttpRequest();
     var data = new FormData();
     data.append("deleteFiles",true);
-    dlt.open("POST","index.php",true);
+    dlt.open("POST","index.php");
     dlt.send(data);
     document.cookie.split(";").forEach(function (c) {
         document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
@@ -114,15 +114,15 @@ function clearDir() {
 window.addEventListener('load', function (event) {
     var submit_btn = document.getElementById('upload');
     submit_btn.addEventListener('click', handler);
-    $("clrck").addEventListener('click', clearCookie);
-    $("filedlt").addEventListener('click', clearDir);
+    getElem("clrck").addEventListener('click', clearCookie);
+    getElem("filedlt").addEventListener('click', clearDir);
 
-    /*$("clearLog").onclick= function () {
+    getElem("clearLog").onclick= function () {
         var l = document.getElementById("log");
         while(l.hasChildNodes()){
             l.removeChild(l.firstChild);
         }
-    }*/
+    }
 });
 /**
  * Created by Sudipta on 3/28/2017.

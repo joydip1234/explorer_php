@@ -151,7 +151,7 @@ input {
     cursor: pointer;
     transition: all 0.5s ease-in;
     overflow: hidden;
-    height: 2em;
+    min-height: 2em;
 }
 
 .file_ls {
@@ -164,7 +164,7 @@ input {
     transition: 0.2s;
     overflow: hidden;
     float: left;
-    height: 2em;
+    min-height: 2em;
 }
 
 .rm{

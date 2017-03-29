@@ -110,12 +110,15 @@ echo $c."</span></div>";
 <div id="folder">
     <?php
     $files = glob('./files/*'); // get all file names
+	$index = 1;
     if(!empty($files) || $toshow == true){
         foreach($files as $file){ // iterate files
             if(is_file($file))
                 $words  = explode("/",$file);
-            echo "<div class='file_cont'><a class='file_ls' href='".$file."'>".$words[2]."</a><span class='rm'> &#10005; </span></div>";
+            echo "<div class='file_cont'><a class='file_ls' href='".$file."'>[".$index."] ".$words[2]."</a><span class='rm'> &#10005; </span></div>";
+			$index ++;
         }
+		
         $tosshow = false;
     }else{
         echo "<p style='padding: 20px;text-align: center;width: 100%;' id='noFileToast'>No File in Directory</p>";
@@ -133,7 +136,7 @@ echo $c."</span></div>";
         <form>
             <input type="button" value="clear cookies" name="clrck" id="clrck">
             <input type="button" value="Delete Files" name="filedlt" id="filedlt">
-            <!--input type="button" value="Clear Log"  id="clearLog"-->
+            <input type="button" value="Clear Log"  id="clearLog">
         </form>
 
     </div>
