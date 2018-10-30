@@ -87,7 +87,7 @@ var handler = function (event) {
         });
 
         req.open('POST', 'index.php');
-        //req.setRequestHeader("Cache-Control", "no-cache");
+        req.setRequestHeader("Cache-Control", "no-cache");
         req.send(data);
     } catch (e) {
         alert(e.which.toString());
